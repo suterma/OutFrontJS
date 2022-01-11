@@ -9,7 +9,7 @@ const containerStyles = {
 	height: '450px',
 	display: 'none',
 	bottom: '85px',
-	zIndex: 100000,
+	zIndex: "100000",
 	wordWrap: 'break-word',
 	overflowWrap: 'break-word',
 	right: '20px',
@@ -20,13 +20,13 @@ const containerStyles = {
 }
 
 const floatButtonStyles = {
-	opacity: 0.8,
+	opacity: "0.8",
 	position: 'fixed',
 	width: '70px',
 	border: 'none',
 	height: '35px',
 	bottom: '40px',
-	zIndex: 100000,
+	zIndex: "100000",
 	right: '15px',
 	backgroundColor: '#d4ebf2',
 	color: '#fff',
@@ -53,7 +53,7 @@ const clearBtnStyles = {
 	float: 'right',
 	paddingRight: '10px',
 	paddingTop: '3px',
-	opacity: 0.5,
+	opacity: "0.5",
 	fontSize: '15px',
 	backgroundColor: 'transparent',
 	border: 'none'
@@ -83,13 +83,14 @@ const notificationBadgeStyles = {
 let outfrontLogUl = document.createElement('UL') // Memory leak alert
 const notificationBadge = document.createElement('SPAN') // Memory leak alert
 
-const createButtonAndContainer = () => {
+const createButtonAndContainer = (): void => {
 	try {
 		// Create container start
 		const container = document.createElement('DIV')
 		container.id = 'outfront-container'
-		for (let property in containerStyles) {
-			container.style[property] = containerStyles[property]
+		const containerCss = containerStyles as CSSStyleDeclaration;
+		for (let property in containerCss) {
+			container.style[property] = containerCss[property]
 		}
 		// Create container end
 
@@ -97,25 +98,27 @@ const createButtonAndContainer = () => {
 		const clearBtn = document.createElement('BUTTON') // button
 		clearBtn.id = 'outfront-clear-btn'
 		clearBtn.innerText = '⟲' // 🗑️ ⟲ ⌫
-		for (let property in clearBtnStyles) {
-			clearBtn.style[property] = clearBtnStyles[property]
+		const clearBtnCss = clearBtnStyles as CSSStyleDeclaration;
+		for (let property in clearBtnCss) {
+			clearBtn.style[property] = clearBtnCss[property]
 		}
 		clearBtn.addEventListener('click', () => (outfrontLogUl.innerHTML = ''))
 		container.appendChild(clearBtn)
 		// Create clear console button end
 
 		//Create logo text start
-		let logo = document.createElement('DIV')
+		const logo = document.createElement('DIV')
 		logo.id = 'outfront-container'
 		logo.innerText = '𝙊𝙪𝙩𝙁𝙧𝙤𝙣𝙩 𝙅𝙎'
-		for (let property in logoTextStyles) {
-			logo.style[property] = logoTextStyles[property]
+		const logoTextCss = logoTextStyles as CSSStyleDeclaration;
+		for (let property in logoTextCss) {
+			logo.style[property] = logoTextCss[property]
 		}
 		container.appendChild(logo)
 		// Create logo text end
 
 		// hr start
-		let hr = document.createElement('HR')
+		const hr = document.createElement('HR')
 		hr.style.marginTop = '1px'
 		hr.style.marginBottom = "0"
 		hr.style.border = "0"
@@ -133,23 +136,24 @@ const createButtonAndContainer = () => {
 		const toggleBtn = document.createElement('BUTTON')
 		toggleBtn.id = 'outfront-float'
 		toggleBtn.innerText = '🐞'
-		for (let property in floatButtonStyles) {
-			toggleBtn.style[property] = floatButtonStyles[property]
+		const buttonCss = floatButtonStyles as CSSStyleDeclaration;
+		for (let property in buttonCss) {
+			toggleBtn.style[property] = buttonCss[property]
 		}
 		toggleBtn.addEventListener(
 			'mouseenter',
-			() => (toggleBtn.style.opacity = buttonDefaultOpacity.opacity.toString())
+			(): string => (toggleBtn.style.opacity = buttonDefaultOpacity.opacity.toString())
 		)
 		toggleBtn.addEventListener(
 			'mouseout',
-			() =>
+			(): string =>
 				(toggleBtn.style.opacity =
 					(container.style.display === 'none'
 						? floatButtonStyles.opacity
 						: buttonDefaultOpacity.opacity).toString())
 		)
 
-		toggleBtn.addEventListener('click', () => {
+		toggleBtn.addEventListener('click', (): void => {
 			if (container.style.display === 'none') {
 				container.style.display = 'block'
 				toggleBtn.style.opacity = buttonDefaultOpacity.opacity.toString();
@@ -165,8 +169,9 @@ const createButtonAndContainer = () => {
 		// const notificationBadge = document.createElement('SPAN') // initialized in global scope
 		notificationBadge.id = 'outfront-badge'
 		// notificationBadge.innerText = 'b'
-		for (let property in notificationBadgeStyles) {
-			notificationBadge.style[property] = notificationBadgeStyles[property]
+		const badgeCss = notificationBadgeStyles as CSSStyleDeclaration;
+		for (let property in badgeCss) {
+			notificationBadge.style[property] = badgeCss[property]
 		}
 		toggleBtn.append(notificationBadge)
 		// Create notification badge start
@@ -178,9 +183,10 @@ const createButtonAndContainer = () => {
 	}
 }
 
-const toggleNotoficationBadge = color => {
+const toggleNotoficationBadge = (color: string): void => {
 	// toggle notification badge only if container is closed
-	if (document.getElementById('outfront-container').style.display !== 'block') {
+	const outFrontContainer = document.getElementById('outfront-container');
+	if (outFrontContainer && outFrontContainer.style.display !== 'block') {
 		notificationBadge.style.display = 'block'
 		notificationBadge.style.backgroundColor = color
 	}
@@ -190,9 +196,9 @@ const appendToContainer = (msg:any, type:string) => {
 	// Create li start
 	const logLi = document.createElement('LI')
 	logLi.id = 'outfront-log-li'
-    const css = listItemStyles as CSSStyleDeclaration;
-	for (let property in listItemStyles) {
-		logLi.style[property] = listItemStyles[property]
+    const itemCss = listItemStyles as CSSStyleDeclaration;
+	for (let property in itemCss) {
+		logLi.style[property] = itemCss[property]
 	}
 	// Create li end
 

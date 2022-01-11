@@ -1,15 +1,15 @@
 {
   "name": "outfront",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "type": "module",
   "description": "console logs, errors and warning on the screen",
-  "main": "index.js",
-  "bin": "index.js",
+  "main": "index.ts",
+  "bin": "index.ts",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.ts"
   },
   "files": [
-    "index.js",
+    "index.ts",
     "package.json",
     "README.md",
     "CHANGELOG.md"
